@@ -1,17 +1,52 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Lego Set Parts Inventory</h1>
+    <div class="search-bar">
+      <label for="set-search">Search for set:</label>
+      <input v-model="searchInput" type="text" id="set-search" required>
+      <button @click="handleSearch" type="button" value="Search"></button>
+    </div>
+    <div class="set-details">
+
+    </div>
+    <div class="parts-inventory">
+
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import SetSearch from './components/SetSearch.vue';
+import {eventBus} from './main.js';
+
+const API_KEY='fd0886f85edf712d1b706a3b95a81c30'
 
 export default {
   name: 'App',
+    data() {
+      return {
+        searchInput: null,
+        setParts: [],
+        setDetails: []
+      }
+    },
   components: {
-    HelloWorld
+
+  },
+  methods: {
+    handleSearch(){
+      fetch(`https://rebrickable.com/api/v3/lego/sets/${this.searchInput}/`, {
+        headers: {
+          'Authorization': 'key ' + API_KEY
+        }})
+      .then(res => res.json())
+      .then(payload => this.setDetails = payload)
+      console.log(this.setDetails)
+    }
+  },
+  // ${this.setSelect}/parts/
+  mounted() {
+
   }
 }
 </script>
