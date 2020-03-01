@@ -10,13 +10,14 @@
       <set-details :legoSet='legoSet'></set-details>
     </div>
     <div class="parts-inventory">
-
+      <set-inventory :setParts='setParts'></set-inventory>
     </div>
   </div>
 </template>
 
 <script>
 import SetDetails from './components/SetDetails.vue';
+import SetInventory from './components/SetInventory.vue';
 import {eventBus} from './main.js';
 
 const API_KEY='fd0886f85edf712d1b706a3b95a81c30'
@@ -31,7 +32,8 @@ export default {
       }
     },
   components: {
-    "set-details": SetDetails
+    "set-details": SetDetails,
+    "set-inventory": SetInventory
   },
   methods: {
     handleSearch(){
@@ -41,12 +43,21 @@ export default {
         }})
       .then(res => res.json())
       .then(payload => this.legoSet = payload)
-      console.log(this.legoSet)
+      // console.log(this.legoSet)
+    },
+    handlePartsRequest(setnum){
+      fetch(`https://rebrickable.com/api/v3/lego/sets/${setnum}/parts/`, {
+        headers: {
+          'Authorization': 'key ' + API_KEY
+        }})
+      .then(res => res.json())
+      .then(payload => this.setParts = payload.results)
+      // console.log("Set number:", setnum)
     }
   },
   // ${this.setSelect}/parts/
   mounted() {
-
+    eventBus.$on('request-parts', setnum => this.handlePartsRequest(setnum));
   }
 }
 </script>
@@ -61,7 +72,7 @@ export default {
   margin-top: 60px;
   display: grid;
   height: 100%;
-  grid-template-columns: 5% 45% 45% 5%;
+  grid-template-columns: 5% 25% 65% 5%;
   column-gap: normal;
 }
 

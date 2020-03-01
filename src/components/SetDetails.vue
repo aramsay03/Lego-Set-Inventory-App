@@ -7,8 +7,7 @@
         <li>Year of lanch: {{legoSet.year}}</li>
         <li>Number of parts: {{legoSet.num_parts}}</li>
       </ul>
-    </section>
-    <section class="right">
+      <button @click="handlePartsClick(legoSet.set_num)"type="button" name="button">View Parts List</button><br>
       <img :src="legoSet.set_img_url" alt="">
     </section>
   </div>
@@ -21,7 +20,9 @@ export default {
   name: 'set-details',
   props: ['legoSet'],
   methods: {
-
+    handlePartsClick(setnum){
+      eventBus.$emit('request-parts', setnum)
+    }
   },
   components: {
 
@@ -33,7 +34,7 @@ export default {
 <style lang="css" scoped>
 img {
   max-width: 200px;
-  margin-right: 30px;
+  margin: 20px;
   /* max-height: inherit; */
 }
 
@@ -49,6 +50,7 @@ li {
   display: flex;
   list-style: none;
   line-height: 20px;
+  padding: 0px;
   /* justify-content: space-around; */
   /* width: 50%; */
 }
@@ -56,9 +58,9 @@ li {
 div {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   width: 100%;
-  padding: 50px;
+  /* padding: 50px; */
 }
 
 .label {
