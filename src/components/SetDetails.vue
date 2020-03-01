@@ -1,5 +1,5 @@
 <template lang="html">
-  <div :id="legoSet" class="details">
+  <div :id="legoSet" class="sticky-container">
     <section class="left">
       <ul v-if="legoSet">
         <li>Set Name: {{legoSet.name}}</li>
@@ -70,4 +70,10 @@ div {
 .text {
   text-align: right;
 }
+
+.sticky-container {
+    position: sticky;
+    top: 0;
+}
+
 </style>

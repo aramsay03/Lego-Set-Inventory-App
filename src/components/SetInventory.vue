@@ -5,9 +5,8 @@
       <li v-for="part in setParts" :setParts="setPart">
         <div class="">
           <img :src="part.part.part_img_url" alt="">
-          <p>Part no: {{part.in_part_id}}</p>
-          <p>Part name: {{part.part.name}}</p>
-          <p>Part color: {{part.color.name}}</p>
+          <p>{{part.part.name}}</p>
+          <p>Part no: {{part.inv_part_id}}   Color: {{part.color.name}}</p>
           <p>Qty: {{part.quantity}}</p>
         </div>
       </li>
@@ -21,7 +20,7 @@ import {eventBus} from '../main.js';
 
 export default {
   name: 'set-inventory',
-  props: ['setParts', 'legoSet'],
+  props: ['setParts'],
   methods: {
 
   },
@@ -40,6 +39,7 @@ ul {
 }
 
 li {
+  background-color: white;
   border: solid 1px black;
   border-radius: 10px;
   list-style: none;
@@ -50,6 +50,7 @@ li {
 p {
   font-weight: normal;
   font-size: 10px;
+  padding-top: 2px;
 }
 
 img {
