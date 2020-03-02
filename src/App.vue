@@ -20,7 +20,7 @@ import SetDetails from './components/SetDetails.vue';
 import SetInventory from './components/SetInventory.vue';
 import {eventBus} from './main.js';
 
-const API_KEY='fd0886f85edf712d1b706a3b95a81c30'
+const API_KEY=process.env.VUE_APP_EVN_LEGOAPI
 
 export default {
   name: 'App',
@@ -28,15 +28,14 @@ export default {
       return {
         searchInput: null,
         setParts: [],
-        legoSet: []
+        legoSet: null
       }
     },
   components: {
     "set-details": SetDetails,
     "set-inventory": SetInventory
   },
-  // process.env.VUE_APP_EVN_LEGOAPI
-  // API_KEY
+
   methods: {
     handleSearch(){
       fetch(`https://rebrickable.com/api/v3/lego/sets/${this.searchInput}/`, {
