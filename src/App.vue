@@ -35,6 +35,8 @@ export default {
     "set-details": SetDetails,
     "set-inventory": SetInventory
   },
+  // process.env.VUE_APP_EVN_LEGOAPI
+  // API_KEY
   methods: {
     handleSearch(){
       fetch(`https://rebrickable.com/api/v3/lego/sets/${this.searchInput}/`, {
